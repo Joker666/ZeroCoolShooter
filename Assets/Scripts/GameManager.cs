@@ -12,6 +12,10 @@ public class GameManager : MonoBehaviour
     public GameObject explosion;
     public GameObject muzzleFlash;
 
+    [Header("Panels")]
+    public GameObject startMenu;
+    public GameObject pauseMenu;
+
     private void Awake()
     {
         if (instance == null)
@@ -23,13 +27,20 @@ public class GameManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        startMenu.SetActive(true);
+        pauseMenu.SetActive(false);
+        Time.timeScale = 0f;
+
         InvokeRepeating("SpawnEnemy", 1.0f, 2.0f);
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            PauseGame(true);
+        }
     }
 
     void SpawnEnemy()
@@ -49,5 +60,22 @@ public class GameManager : MonoBehaviour
         var gm = Instantiate(explosion, trans.position, trans.rotation);
         gm.transform.localScale = Vector3.one * size;
         Destroy(gm, 2.0f);
+    }
+
+    public void StartGame()
+    {
+        startMenu.SetActive(false);
+        Time.timeScale = 1f;
+    }
+
+    public void PauseGame(bool isPaused)
+    {
+        pauseMenu.SetActive(isPaused);
+        Time.timeScale = isPaused ? 0f : 1f;
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 }
