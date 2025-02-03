@@ -29,7 +29,8 @@ public class PlayerController : MonoBehaviour
         float xPos = Input.GetAxis("Horizontal");
         float yPos = Input.GetAxis("Vertical");
 
-        Vector3 movement = new Vector3(xPos, yPos, 0) * speed * Time.deltaTime;
+        Vector3 movement = new Vector3(xPos, yPos, 0);
+        movement = movement.normalized * speed * Time.deltaTime;
         transform.Translate(movement);
     }
 
@@ -55,6 +56,8 @@ public class PlayerController : MonoBehaviour
             GameManager.instance.InstantiateExplosion(transform, 1.0f);
             Destroy(collision.gameObject);
             Destroy(gameObject);
+
+            GameManager.instance.GameOver();
         }
     }
 }
