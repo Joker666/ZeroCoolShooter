@@ -1,0 +1,4 @@
+repository "ZeroCoolShooter 2025-02-02_01-50-28/ZeroCoolShooter@3574291927215@cloud"
+  path "/"
+    br "/main"
+    co "/main"
