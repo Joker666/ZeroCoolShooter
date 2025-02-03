@@ -32,13 +32,19 @@ public class PlayerController : MonoBehaviour
         Vector3 movement = new Vector3(xPos, yPos, 0);
         movement = movement.normalized * speed * Time.deltaTime;
         transform.Translate(movement);
+
+        // Clamp position using GameManager's boundary values
+        Vector3 clampedPosition = transform.position;
+        clampedPosition.x = Mathf.Clamp(clampedPosition.x, -5.77f, 5.77f);
+        // You can also set custom Y boundaries, for example -5 to 5
+        clampedPosition.y = Mathf.Clamp(clampedPosition.y, -4.44f, 4.44f);
+        transform.position = clampedPosition;
     }
 
     private void Shoot()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            Debug.Log("Shoot");
             GameObject gm = Instantiate(missile, missileSpawnPosition);
             gm.transform.SetParent(null);
             Destroy(gm, destroyTime);
