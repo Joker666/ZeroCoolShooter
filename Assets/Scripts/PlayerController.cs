@@ -30,7 +30,7 @@ public class PlayerController : MonoBehaviour
         float yPos = Input.GetAxis("Vertical");
 
         Vector3 movement = new Vector3(xPos, yPos, 0);
-        movement = movement.normalized * speed * Time.deltaTime;
+        movement = speed * Time.deltaTime * movement.normalized;
         transform.Translate(movement);
 
         // Clamp position using GameManager's boundary values

@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour
         pauseMenu.SetActive(false);
         Time.timeScale = 0f;
 
-        InvokeRepeating("SpawnEnemy", 1.0f, 2.0f);
+        InvokeRepeating(nameof(SpawnEnemy), 1.0f, 2.0f);
     }
 
     // Update is called once per frame

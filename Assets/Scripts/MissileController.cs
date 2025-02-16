@@ -21,7 +21,7 @@ public class MissileController : MonoBehaviour
         currentSpeed = Mathf.Min(currentSpeed + accelerationRate * Time.deltaTime, maxSpeed);
 
         // Move missile forward
-        transform.Translate(Vector3.up * currentSpeed * Time.deltaTime);
+        transform.Translate(currentSpeed * Time.deltaTime * Vector3.up);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
